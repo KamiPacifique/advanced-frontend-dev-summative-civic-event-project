@@ -1,0 +1,94 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Sign in · CivicConnect</title>
+  <meta name="description" content="Sign in to CivicConnect to register for local events, listen to announcements and watch community promos.">
+  <link rel="icon" href="assets/img/favicon.svg" type="image/svg+xml">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <script src="https://cdn.tailwindcss.com/3.4.16"></script>
+  <script src="assets/js/tailwind.config.js"></script>
+  <link rel="stylesheet" href="assets/css/app.css">
+</head>
+<body class="bg-canvas font-sans text-ink antialiased min-h-screen">
+  <a href="#main" class="skip-link">Skip to sign-in form</a>
+  <noscript><p class="p-4 bg-accent-soft text-accent-text text-sm">CivicConnect needs JavaScript enabled to work.</p></noscript>
+
+  <div class="min-h-screen grid lg:grid-cols-[1.15fr_1fr]">
+    <!-- Brand panel -->
+    <aside class="on-dark hidden lg:flex flex-col justify-between bg-gradient-to-br from-brand-hover via-brand to-blue-600 text-white p-12 xl:p-16" aria-label="About CivicConnect">
+      <div class="flex items-center gap-2.5"><span class="w-9 h-9 rounded-xl bg-white text-brand flex items-center justify-center" data-icon="landmark"></span><span class="text-xl font-extrabold">CivicConnect</span></div>
+      <div class="max-w-lg">
+        <h1 class="text-4xl xl:text-5xl font-extrabold leading-[1.1] tracking-tight">Your city, your events, one place.</h1>
+        <p class="mt-5 text-blue-100 text-lg leading-relaxed">Sign in to register for events, follow announcements and get notified about what matters in your community.</p>
+        <ul class="mt-8 space-y-4 text-[15px] font-medium">
+          <li class="flex items-center gap-3"><span class="w-9 h-9 rounded-lg bg-white/15 flex items-center justify-center" data-icon="calendar"></span>Discover and register for local events</li>
+          <li class="flex items-center gap-3"><span class="w-9 h-9 rounded-lg bg-white/15 flex items-center justify-center" data-icon="megaphone"></span>Listen to official audio announcements</li>
+          <li class="flex items-center gap-3"><span class="w-9 h-9 rounded-lg bg-white/15 flex items-center justify-center" data-icon="video"></span>Watch captioned community promos</li>
+        </ul>
+      </div>
+      <figure class="rounded-2xl bg-white/10 border border-white/15 p-5 max-w-xl">
+        <blockquote class="text-[15px]">“I found three volunteering events in my sector in one evening.”</blockquote>
+        <figcaption class="mt-2 text-sm text-blue-100">— Jean Bosco, Kicukiro resident</figcaption>
+      </figure>
+    </aside>
+
+    <!-- Form -->
+    <main id="main" tabindex="-1" class="flex flex-col justify-center px-5 sm:px-10 py-10">
+      <div class="w-full max-w-md mx-auto">
+        <a href="login.html" class="lg:hidden flex items-center gap-2.5 mb-10"><span class="w-9 h-9 rounded-xl bg-brand text-white flex items-center justify-center" data-icon="landmark"></span><span class="text-xl font-extrabold">CivicConnect</span></a>
+
+        <h2 class="text-3xl font-extrabold tracking-tight">Welcome back</h2>
+        <p class="mt-2 text-ink-secondary">Sign in with your email and password.</p>
+
+        <div id="login-alert" class="ce-form-alert mt-6 empty:hidden"></div>
+
+        <form id="login-form" class="mt-6 space-y-5" novalidate>
+          <div data-field>
+            <label for="email" class="block text-sm font-semibold mb-1.5">Email</label>
+            <input id="email" name="email" type="email" autocomplete="email" required placeholder="aline.uwase@example.com"
+              class="block w-full h-11 rounded-lg border border-line bg-white px-3.5 text-sm shadow-sm placeholder:text-ink-muted focus:border-brand focus:ring-4 focus:ring-brand-soft focus-visible:outline-none aria-[invalid=true]:border-danger">
+          </div>
+          <div data-field>
+            <div class="flex items-center justify-between mb-1.5">
+              <label for="password" class="block text-sm font-semibold">Password</label>
+              <a href="mailto:support@civicconnect.rw?subject=Password%20reset" class="text-sm font-semibold text-brand hover:underline">Forgot password?</a>
+            </div>
+            <div class="relative">
+              <input id="password" name="password" type="password" autocomplete="current-password" required placeholder="Your password"
+                class="block w-full h-11 rounded-lg border border-line bg-white pl-3.5 pr-11 text-sm shadow-sm placeholder:text-ink-muted focus:border-brand focus:ring-4 focus:ring-brand-soft focus-visible:outline-none aria-[invalid=true]:border-danger">
+              <button type="button" class="js-toggle-pw absolute right-1.5 top-1/2 -translate-y-1/2 w-8 h-8 rounded-md flex items-center justify-center text-ink-muted hover:text-ink" aria-label="Show password" aria-controls="password" data-icon="eye"></button>
+            </div>
+          </div>
+          <div class="flex items-start gap-3">
+            <input id="remember" name="remember" type="checkbox" class="mt-0.5 w-4 h-4 rounded border-line-strong text-brand focus:ring-brand" aria-describedby="remember-hint">
+            <div>
+              <label for="remember" class="text-sm font-semibold">Keep me signed in</label>
+              <p id="remember-hint" class="text-xs text-ink-muted">Checked: token saved in localStorage (stays after closing the browser). Unchecked: sessionStorage — signed out when you close the tab. Avoid on shared computers.</p>
+            </div>
+          </div>
+          <button type="submit" class="w-full inline-flex items-center justify-center gap-2 h-11 rounded-lg bg-brand text-white font-semibold text-sm hover:bg-brand-hover shadow-sm disabled:opacity-60">Sign in</button>
+        </form>
+
+        <p class="mt-6 text-center text-sm text-ink-secondary">Don’t have an account? <a href="signup.html" class="font-semibold text-brand hover:underline">Create one</a></p>
+        <p class="mt-6 flex items-center justify-center gap-1.5 text-xs text-ink-muted"><span data-icon="shield"></span>Protected with bearer-token authentication</p>
+      </div>
+    </main>
+  </div>
+
+  <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+  <script src="assets/js/config.js"></script>
+  <script src="assets/js/core/utils.js"></script>
+  <script src="assets/js/core/icons.js"></script>
+  <script src="assets/js/core/auth.js"></script>
+  <script src="assets/js/core/api.js"></script>
+  <script src="assets/js/core/cache.js"></script>
+  <script src="assets/js/core/ui.js"></script>
+  <script src="assets/js/components/layout.js"></script>
+  <script src="assets/js/components/forms.js"></script>
+  <script src="assets/js/pages/login.js"></script>
+</body>
+</html>

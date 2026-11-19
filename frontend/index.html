@@ -1,0 +1,31 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>CivicConnect</title>
+  <link rel="icon" href="assets/img/favicon.svg" type="image/svg+xml">
+  <style>body{font-family:system-ui,sans-serif;display:grid;place-items:center;min-height:100vh;margin:0;color:#475569}</style>
+</head>
+<body>
+  <p>Loading CivicConnect… <a href="login.html">Continue</a></p>
+  <script src="assets/js/config.js"></script>
+  <script src="assets/js/core/utils.js"></script>
+  <script>
+    // Entry point: signed-in users go to their dashboard, everyone else to login.
+    (function () {
+      var raw = null;
+      try { raw = sessionStorage.getItem('ce.session') || localStorage.getItem('ce.session'); } catch (e) {}
+      var s = null; try { s = raw && JSON.parse(raw); } catch (e) {}
+      var target = 'login.html';
+      if (s && s.token) {
+        var exp = null;
+        try { var p = s.token.split('.')[1].replace(/-/g, '+').replace(/_/g, '/'); while (p.length % 4) p += '='; exp = JSON.parse(atob(p)).exp; } catch (e) {}
+        if (!exp || exp * 1000 > Date.now()) target = s.user && s.user.role === 'admin' ? 'admin/index.html' : 'dashboard.html';
+        else target = 'login.html?reason=expired';
+      }
+      location.replace(CE.util.url(target));
+    })();
+  </script>
+</body>
+</html>

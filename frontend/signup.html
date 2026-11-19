@@ -1,0 +1,99 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Create account · CivicConnect</title>
+  <meta name="description" content="Create a free CivicConnect account to register for events, leave feedback and receive in-app notifications.">
+  <link rel="icon" href="assets/img/favicon.svg" type="image/svg+xml">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <script src="https://cdn.tailwindcss.com/3.4.16"></script>
+  <script src="assets/js/tailwind.config.js"></script>
+  <link rel="stylesheet" href="assets/css/app.css">
+</head>
+<body class="bg-canvas font-sans text-ink antialiased min-h-screen">
+  <a href="#main" class="skip-link">Skip to sign-up form</a>
+  <noscript><p class="p-4 bg-accent-soft text-accent-text text-sm">CivicConnect needs JavaScript enabled to work.</p></noscript>
+
+  <div class="min-h-screen grid lg:grid-cols-[1.15fr_1fr]">
+    <aside class="on-dark hidden lg:flex flex-col justify-between bg-gradient-to-br from-brand-hover via-brand to-blue-600 text-white p-12 xl:p-16" aria-label="About CivicConnect">
+      <div class="flex items-center gap-2.5"><span class="w-9 h-9 rounded-xl bg-white text-brand flex items-center justify-center" data-icon="landmark"></span><span class="text-xl font-extrabold">CivicConnect</span></div>
+      <div class="max-w-lg">
+        <h1 class="text-4xl xl:text-5xl font-extrabold leading-[1.1] tracking-tight">Join your community in under a minute.</h1>
+        <p class="mt-5 text-blue-100 text-lg leading-relaxed">Create a free account to register for events, leave feedback and receive in-app notifications.</p>
+        <ul class="mt-8 space-y-4 text-[15px] font-medium">
+          <li class="flex items-center gap-3"><span class="w-9 h-9 rounded-lg bg-white/15 flex items-center justify-center" data-icon="calendar"></span>Discover and register for local events</li>
+          <li class="flex items-center gap-3"><span class="w-9 h-9 rounded-lg bg-white/15 flex items-center justify-center" data-icon="megaphone"></span>Listen to official audio announcements</li>
+          <li class="flex items-center gap-3"><span class="w-9 h-9 rounded-lg bg-white/15 flex items-center justify-center" data-icon="video"></span>Watch captioned community promos</li>
+        </ul>
+      </div>
+      <figure class="rounded-2xl bg-white/10 border border-white/15 p-5 max-w-xl">
+        <blockquote class="text-[15px]">“I found three volunteering events in my sector in one evening.”</blockquote>
+        <figcaption class="mt-2 text-sm text-blue-100">— Jean Bosco, Kicukiro resident</figcaption>
+      </figure>
+    </aside>
+
+    <main id="main" tabindex="-1" class="flex flex-col justify-center px-5 sm:px-10 py-10">
+      <div class="w-full max-w-md mx-auto">
+        <a href="login.html" class="lg:hidden flex items-center gap-2.5 mb-10"><span class="w-9 h-9 rounded-xl bg-brand text-white flex items-center justify-center" data-icon="landmark"></span><span class="text-xl font-extrabold">CivicConnect</span></a>
+
+        <h2 class="text-3xl font-extrabold tracking-tight">Create your account</h2>
+        <p class="mt-2 text-ink-secondary">All fields are required.</p>
+
+        <div id="signup-alert" class="ce-form-alert mt-6 empty:hidden"></div>
+
+        <form id="signup-form" class="mt-6 space-y-5" novalidate>
+          <div data-field>
+            <label for="full_name" class="block text-sm font-semibold mb-1.5">Full name</label>
+            <input id="full_name" name="full_name" type="text" autocomplete="name" required maxlength="255" placeholder="Aline Uwase"
+              class="block w-full h-11 rounded-lg border border-line bg-white px-3.5 text-sm shadow-sm placeholder:text-ink-muted focus:border-brand focus:ring-4 focus:ring-brand-soft focus-visible:outline-none aria-[invalid=true]:border-danger">
+          </div>
+          <div data-field>
+            <label for="email" class="block text-sm font-semibold mb-1.5">Email</label>
+            <input id="email" name="email" type="email" autocomplete="email" required maxlength="255" placeholder="aline.uwase@example.com"
+              class="block w-full h-11 rounded-lg border border-line bg-white px-3.5 text-sm shadow-sm placeholder:text-ink-muted focus:border-brand focus:ring-4 focus:ring-brand-soft focus-visible:outline-none aria-[invalid=true]:border-danger">
+          </div>
+          <div data-field>
+            <label for="password" class="block text-sm font-semibold mb-1.5">Password</label>
+            <div class="relative">
+              <input id="password" name="password" type="password" autocomplete="new-password" required aria-describedby="pw-strength"
+                class="block w-full h-11 rounded-lg border border-line bg-white pl-3.5 pr-11 text-sm shadow-sm focus:border-brand focus:ring-4 focus:ring-brand-soft focus-visible:outline-none aria-[invalid=true]:border-danger">
+              <button type="button" class="js-toggle-pw absolute right-1.5 top-1/2 -translate-y-1/2 w-8 h-8 rounded-md flex items-center justify-center text-ink-muted hover:text-ink" aria-label="Show password" data-target="#password" data-icon="eye"></button>
+            </div>
+            <!-- Strength meter -->
+            <div id="pw-strength" class="mt-2.5">
+              <div class="grid grid-cols-4 gap-1.5" aria-hidden="true">
+                <span class="pw-bar h-1.5 rounded-full bg-line"></span><span class="pw-bar h-1.5 rounded-full bg-line"></span><span class="pw-bar h-1.5 rounded-full bg-line"></span><span class="pw-bar h-1.5 rounded-full bg-line"></span>
+              </div>
+              <p class="mt-1.5 flex justify-between text-xs"><span class="text-ink-muted">Password strength</span><span id="pw-label" class="font-semibold text-ink-muted" aria-live="polite">—</span></p>
+              <ul id="pw-rules" class="mt-1.5 flex flex-wrap gap-x-4 gap-y-1 text-xs" aria-label="Password requirements"></ul>
+            </div>
+          </div>
+          <div data-field>
+            <label for="confirm_password" class="block text-sm font-semibold mb-1.5">Confirm password</label>
+            <input id="confirm_password" name="confirm_password" type="password" autocomplete="new-password" required
+              class="block w-full h-11 rounded-lg border border-line bg-white px-3.5 text-sm shadow-sm focus:border-brand focus:ring-4 focus:ring-brand-soft focus-visible:outline-none aria-[invalid=true]:border-danger">
+          </div>
+          <button type="submit" class="w-full inline-flex items-center justify-center gap-2 h-11 rounded-lg bg-brand text-white font-semibold text-sm hover:bg-brand-hover shadow-sm disabled:opacity-60">Create account</button>
+        </form>
+
+        <p class="mt-6 text-center text-sm text-ink-secondary">Already have an account? <a href="login.html" class="font-semibold text-brand hover:underline">Sign in</a></p>
+      </div>
+    </main>
+  </div>
+
+  <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+  <script src="assets/js/config.js"></script>
+  <script src="assets/js/core/utils.js"></script>
+  <script src="assets/js/core/icons.js"></script>
+  <script src="assets/js/core/auth.js"></script>
+  <script src="assets/js/core/api.js"></script>
+  <script src="assets/js/core/cache.js"></script>
+  <script src="assets/js/core/ui.js"></script>
+  <script src="assets/js/components/layout.js"></script>
+  <script src="assets/js/components/forms.js"></script>
+  <script src="assets/js/pages/signup.js"></script>
+</body>
+</html>
