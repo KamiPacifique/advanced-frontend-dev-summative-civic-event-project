@@ -1,0 +1,88 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>My profile · CivicConnect</title>
+  <meta name="description" content="View and update your CivicConnect profile.">
+  <link rel="icon" href="assets/img/favicon.svg" type="image/svg+xml">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <script src="https://cdn.tailwindcss.com/3.4.16"></script>
+  <script src="assets/js/tailwind.config.js"></script>
+  <link rel="stylesheet" href="assets/css/app.css">
+</head>
+<body class="bg-canvas font-sans text-ink antialiased min-h-screen flex flex-col">
+  <a href="#main" class="skip-link">Skip to content</a>
+  <div id="app-header"></div>
+
+  <main id="main" tabindex="-1" class="flex-1">
+    <div class="max-w-content mx-auto px-4 sm:px-6 lg:px-8 py-8 sm:py-10">
+      <p class="text-overline uppercase text-brand">Account</p>
+      <h1 class="mt-1 text-2xl sm:text-3xl font-extrabold tracking-tight">My profile</h1>
+      <p class="mt-2 text-ink-secondary">Update your name and email. Role and account status are managed by administrators.</p>
+
+      <div class="mt-8 grid gap-6 lg:grid-cols-[20rem_1fr] items-start">
+        <!-- Summary card -->
+        <section id="summary" class="bg-white rounded-2xl border border-line shadow-card p-6" aria-label="Profile summary" aria-busy="true">
+          <div class="flex flex-col items-center" aria-hidden="true"><div class="skeleton w-20 h-20 !rounded-full"></div><div class="skeleton h-5 w-32 mt-4"></div><div class="skeleton h-3.5 w-40 mt-2"></div></div>
+        </section>
+
+        <!-- Edit form -->
+        <section class="bg-white rounded-2xl border border-line shadow-card p-5 sm:p-7" aria-labelledby="pi-h">
+          <h2 id="pi-h" class="text-xl font-bold">Personal information</h2>
+          <div id="form-alert" class="ce-form-alert mt-4 empty:hidden"></div>
+          <form id="profile-form" class="mt-5 grid gap-5 sm:grid-cols-2" novalidate>
+            <div data-field>
+              <label for="full_name" class="block text-sm font-semibold mb-1.5">Full name</label>
+              <input id="full_name" name="full_name" type="text" autocomplete="name" required maxlength="255"
+                class="block w-full h-11 rounded-lg border border-line bg-white px-3.5 text-sm shadow-sm focus:border-brand focus:ring-4 focus:ring-brand-soft focus-visible:outline-none aria-[invalid=true]:border-danger">
+            </div>
+            <div data-field>
+              <label for="email" class="block text-sm font-semibold mb-1.5">Email</label>
+              <input id="email" name="email" type="email" autocomplete="email" required maxlength="255"
+                class="block w-full h-11 rounded-lg border border-line bg-white px-3.5 text-sm shadow-sm focus:border-brand focus:ring-4 focus:ring-brand-soft focus-visible:outline-none aria-[invalid=true]:border-danger">
+            </div>
+            <!-- Role and status are read-only: the API rejects updates to them (and so does this UI). -->
+            <div>
+              <label for="role" class="block text-sm font-semibold mb-1.5">Role</label>
+              <div class="relative">
+                <input id="role" type="text" readonly aria-readonly="true" aria-describedby="role-hint" class="block w-full h-11 rounded-lg border border-line bg-subtle px-3.5 pr-10 text-sm text-ink-muted cursor-not-allowed">
+                <span class="absolute right-3 top-1/2 -translate-y-1/2 text-ink-muted" data-icon="lock"></span>
+              </div>
+              <p id="role-hint" class="mt-1.5 text-xs text-ink-muted">Only administrators can change this.</p>
+            </div>
+            <div>
+              <label for="status" class="block text-sm font-semibold mb-1.5">Account status</label>
+              <div class="relative">
+                <input id="status" type="text" readonly aria-readonly="true" aria-describedby="status-hint" class="block w-full h-11 rounded-lg border border-line bg-subtle px-3.5 pr-10 text-sm text-ink-muted cursor-not-allowed">
+                <span class="absolute right-3 top-1/2 -translate-y-1/2 text-ink-muted" data-icon="lock"></span>
+              </div>
+              <p id="status-hint" class="mt-1.5 text-xs text-ink-muted">Only administrators can change this.</p>
+            </div>
+            <div class="sm:col-span-2 flex flex-wrap justify-end gap-2 pt-2">
+              <button type="button" id="discard" class="inline-flex items-center h-10 px-4 rounded-lg border border-line bg-white text-sm font-semibold hover:bg-subtle disabled:opacity-50" disabled>Discard</button>
+              <button type="submit" class="inline-flex items-center gap-2 h-10 px-4 rounded-lg bg-brand text-white text-sm font-semibold hover:bg-brand-hover disabled:opacity-50" disabled>Save changes</button>
+            </div>
+          </form>
+        </section>
+      </div>
+    </div>
+  </main>
+
+  <div id="app-footer"></div>
+
+  <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+  <script src="assets/js/config.js"></script>
+  <script src="assets/js/core/utils.js"></script>
+  <script src="assets/js/core/icons.js"></script>
+  <script src="assets/js/core/auth.js"></script>
+  <script src="assets/js/core/api.js"></script>
+  <script src="assets/js/core/cache.js"></script>
+  <script src="assets/js/core/ui.js"></script>
+  <script src="assets/js/components/layout.js"></script>
+  <script src="assets/js/components/notifications.js"></script>
+  <script src="assets/js/pages/profile.js"></script>
+</body>
+</html>

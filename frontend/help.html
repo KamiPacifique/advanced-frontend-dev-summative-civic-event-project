@@ -1,0 +1,81 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Help &amp; policies · CivicConnect</title>
+  <meta name="description" content="Help center, accessibility statement, privacy policy and terms of use for CivicConnect.">
+  <link rel="icon" href="assets/img/favicon.svg" type="image/svg+xml">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <script src="https://cdn.tailwindcss.com/3.4.16"></script>
+  <script src="assets/js/tailwind.config.js"></script>
+  <link rel="stylesheet" href="assets/css/app.css">
+</head>
+<body class="bg-canvas font-sans text-ink antialiased min-h-screen flex flex-col">
+  <a href="#main" class="skip-link">Skip to content</a>
+  <div id="app-header"></div>
+
+  <main id="main" tabindex="-1" class="flex-1">
+    <div class="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 py-10 space-y-8">
+      <div>
+        <p class="text-overline uppercase text-brand">Help</p>
+        <h1 class="mt-1 text-3xl font-extrabold tracking-tight">Help &amp; policies</h1>
+        <nav class="mt-4 flex flex-wrap gap-2 text-sm" aria-label="On this page">
+          <a class="h-8 px-3 inline-flex items-center rounded-full border border-line bg-white font-semibold hover:bg-subtle" href="#help">Help Center</a>
+          <a class="h-8 px-3 inline-flex items-center rounded-full border border-line bg-white font-semibold hover:bg-subtle" href="#accessibility">Accessibility</a>
+          <a class="h-8 px-3 inline-flex items-center rounded-full border border-line bg-white font-semibold hover:bg-subtle" href="#privacy">Privacy</a>
+          <a class="h-8 px-3 inline-flex items-center rounded-full border border-line bg-white font-semibold hover:bg-subtle" href="#terms">Terms</a>
+        </nav>
+      </div>
+
+      <section id="help" class="bg-white rounded-2xl border border-line shadow-card p-6 scroll-mt-24">
+        <h2 class="text-xl font-bold">Help Center</h2>
+        <dl class="mt-4 space-y-4 text-sm text-ink-secondary">
+          <div><dt class="font-semibold text-ink">How do I register for an event?</dt><dd class="mt-1">Open <a class="text-brand font-semibold hover:underline" href="events.html">Events</a>, choose an event and press <strong>Register</strong>. It then appears under My Registrations.</dd></div>
+          <div><dt class="font-semibold text-ink">Can I cancel?</dt><dd class="mt-1">Yes — from the event page or My Registrations. A cancelled registration can’t be re-activated from your account.</dd></div>
+          <div><dt class="font-semibold text-ink">How do I leave feedback?</dt><dd class="mt-1">Registered attendees can rate an event (1–5 stars) and leave a comment once per event. You can edit your review later.</dd></div>
+          <div><dt class="font-semibold text-ink">Still stuck?</dt><dd class="mt-1">Email <a class="text-brand font-semibold hover:underline" href="mailto:support@civicconnect.rw">support@civicconnect.rw</a> or call +250 788 000 000.</dd></div>
+        </dl>
+      </section>
+
+      <section id="accessibility" class="bg-white rounded-2xl border border-line shadow-card p-6 scroll-mt-24">
+        <h2 class="text-xl font-bold">Accessibility</h2>
+        <ul class="mt-4 list-disc pl-5 space-y-2 text-sm text-ink-secondary">
+          <li>All text colour pairs meet WCAG 2.1 AA contrast.</li>
+          <li>Every control is keyboard reachable with a visible focus ring; dialogs trap focus and close with <kbd>Esc</kbd>.</li>
+          <li>Press <kbd>/</kbd> anywhere to jump to search.</li>
+          <li>Audio announcements have a keyboard-operable player (Space, arrow keys, M) and a download option.</li>
+          <li>Promo videos show English captions by default and include a readable transcript.</li>
+          <li>Loading, success and error messages are announced to screen readers.</li>
+        </ul>
+      </section>
+
+      <section id="privacy" class="bg-white rounded-2xl border border-line shadow-card p-6 scroll-mt-24">
+        <h2 class="text-xl font-bold">Privacy Policy</h2>
+        <p class="mt-3 text-sm text-ink-secondary">We store your name, email, event registrations and feedback to provide the service. Your sign-in token is kept in your browser’s sessionStorage (or localStorage if you choose “Keep me signed in”) and expires after one hour. Signing out removes it.</p>
+      </section>
+
+      <section id="terms" class="bg-white rounded-2xl border border-line shadow-card p-6 scroll-mt-24">
+        <h2 class="text-xl font-bold">Terms of Use</h2>
+        <p class="mt-3 text-sm text-ink-secondary">Use CivicConnect respectfully. Feedback must be honest and free of abuse. Administrators may disable accounts that misuse the platform.</p>
+      </section>
+    </div>
+  </main>
+
+  <div id="app-footer"></div>
+
+  <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+  <script src="assets/js/config.js"></script>
+  <script src="assets/js/core/utils.js"></script>
+  <script src="assets/js/core/icons.js"></script>
+  <script src="assets/js/core/auth.js"></script>
+  <script src="assets/js/core/api.js"></script>
+  <script src="assets/js/core/cache.js"></script>
+  <script src="assets/js/core/ui.js"></script>
+  <script src="assets/js/components/layout.js"></script>
+  <script src="assets/js/components/notifications.js"></script>
+  <script>CE.boot({ auth: 'user', layout: 'public', nav: null });</script>
+</body>
+</html>

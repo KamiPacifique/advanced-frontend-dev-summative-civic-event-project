@@ -1,0 +1,71 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Home · CivicConnect</title>
+  <meta name="description" content="Your CivicConnect dashboard: upcoming events, latest announcements and promos.">
+  <link rel="icon" href="assets/img/favicon.svg" type="image/svg+xml">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <script src="https://cdn.tailwindcss.com/3.4.16"></script>
+  <script src="assets/js/tailwind.config.js"></script>
+  <link rel="stylesheet" href="assets/css/app.css">
+</head>
+<body class="bg-canvas font-sans text-ink antialiased min-h-screen flex flex-col">
+  <a href="#main" class="skip-link">Skip to content</a>
+  <div id="app-header"></div>
+
+  <main id="main" tabindex="-1" class="flex-1">
+    <section class="bg-white border-b border-line">
+      <div class="max-w-content mx-auto px-4 sm:px-6 lg:px-8 py-8 sm:py-10">
+        <p class="text-overline uppercase text-brand">My dashboard</p>
+        <h1 id="greeting" class="mt-1 text-2xl sm:text-3xl font-extrabold tracking-tight">Welcome</h1>
+        <p class="mt-2 text-ink-secondary">Here’s what’s happening in your community.</p>
+        <div id="stats" class="mt-6 grid gap-4 grid-cols-2 lg:grid-cols-4" aria-busy="true"></div>
+      </div>
+    </section>
+
+    <div class="max-w-content mx-auto px-4 sm:px-6 lg:px-8 py-8 grid gap-8 lg:grid-cols-[1fr_22rem] items-start">
+      <div class="space-y-10 min-w-0">
+        <section aria-labelledby="my-h">
+          <div class="flex items-center justify-between gap-3"><h2 id="my-h" class="text-xl font-bold">Your upcoming events</h2><a href="my-registrations.html" class="text-sm font-semibold text-brand hover:underline">View all</a></div>
+          <ul id="my-events" class="mt-4 space-y-3"></ul>
+        </section>
+        <section aria-labelledby="soon-h">
+          <div class="flex items-center justify-between gap-3"><h2 id="soon-h" class="text-xl font-bold">Happening soon</h2><a href="events.html?when=upcoming" class="text-sm font-semibold text-brand hover:underline">Browse events</a></div>
+          <div id="soon" class="mt-4 grid gap-5 sm:grid-cols-2"></div>
+        </section>
+      </div>
+      <aside class="space-y-8">
+        <section aria-labelledby="ann-h">
+          <div class="flex items-center justify-between gap-3"><h2 id="ann-h" class="text-xl font-bold">Latest announcements</h2><a href="announcements.html" class="text-sm font-semibold text-brand hover:underline">All</a></div>
+          <ul id="ann" class="mt-4 space-y-3"></ul>
+        </section>
+        <section aria-labelledby="promo-h">
+          <div class="flex items-center justify-between gap-3"><h2 id="promo-h" class="text-xl font-bold">New promos</h2><a href="promos.html" class="text-sm font-semibold text-brand hover:underline">All</a></div>
+          <div id="promos" class="mt-4 space-y-4"></div>
+        </section>
+      </aside>
+    </div>
+  </main>
+
+  <div id="app-footer"></div>
+
+  <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+  <script src="assets/js/config.js"></script>
+  <script src="assets/js/core/utils.js"></script>
+  <script src="assets/js/core/icons.js"></script>
+  <script src="assets/js/core/auth.js"></script>
+  <script src="assets/js/core/api.js"></script>
+  <script src="assets/js/core/cache.js"></script>
+  <script src="assets/js/core/ui.js"></script>
+  <script src="assets/js/components/layout.js"></script>
+  <script src="assets/js/components/notifications.js"></script>
+  <script src="assets/js/components/media.js"></script>
+  <script src="assets/js/components/cards.js"></script>
+  <script src="assets/js/components/events-shared.js"></script>
+  <script src="assets/js/pages/dashboard.js"></script>
+</body>
+</html>

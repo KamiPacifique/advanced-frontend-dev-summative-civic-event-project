@@ -1,0 +1,56 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Search · CivicConnect</title>
+  <meta name="description" content="Search events, announcements and promos.">
+  <link rel="icon" href="assets/img/favicon.svg" type="image/svg+xml">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <script src="https://cdn.tailwindcss.com/3.4.16"></script>
+  <script src="assets/js/tailwind.config.js"></script>
+  <link rel="stylesheet" href="assets/css/app.css">
+</head>
+<body class="bg-canvas font-sans text-ink antialiased min-h-screen flex flex-col">
+  <a href="#main" class="skip-link">Skip to content</a>
+  <div id="app-header"></div>
+
+  <main id="main" tabindex="-1" class="flex-1">
+    <section class="bg-white border-b border-line">
+      <div class="max-w-content mx-auto px-4 sm:px-6 lg:px-8 py-8 sm:py-10">
+        <p class="text-overline uppercase text-brand">Search</p>
+        <h1 class="mt-1 text-2xl sm:text-3xl font-extrabold tracking-tight">Search everything</h1>
+        <form id="search-form" role="search" class="mt-5 relative max-w-2xl">
+          <label for="sq" class="sr-only">Search events, announcements and promos</label>
+          <span class="absolute left-4 top-1/2 -translate-y-1/2 text-ink-muted pointer-events-none" data-icon="search" data-icon-size="w-5 h-5"></span>
+          <input id="sq" name="q" type="search" autocomplete="off" placeholder="Try “clean-up”, “water” or a location…"
+            class="block w-full h-12 rounded-xl border border-line bg-white pl-12 pr-4 text-base shadow-sm placeholder:text-ink-muted focus:border-brand focus:ring-4 focus:ring-brand-soft focus-visible:outline-none">
+        </form>
+      </div>
+    </section>
+    <section class="max-w-content mx-auto px-4 sm:px-6 lg:px-8 py-8">
+      <p id="summary" class="text-sm text-ink-secondary" aria-live="polite"></p>
+      <div id="results" class="mt-6 space-y-10"></div>
+    </section>
+  </main>
+
+  <div id="app-footer"></div>
+
+  <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+  <script src="assets/js/config.js"></script>
+  <script src="assets/js/core/utils.js"></script>
+  <script src="assets/js/core/icons.js"></script>
+  <script src="assets/js/core/auth.js"></script>
+  <script src="assets/js/core/api.js"></script>
+  <script src="assets/js/core/cache.js"></script>
+  <script src="assets/js/core/ui.js"></script>
+  <script src="assets/js/components/layout.js"></script>
+  <script src="assets/js/components/notifications.js"></script>
+  <script src="assets/js/components/media.js"></script>
+  <script src="assets/js/components/cards.js"></script>
+  <script src="assets/js/components/events-shared.js"></script>
+  <script src="assets/js/pages/search.js"></script>
+</body>
+</html>
