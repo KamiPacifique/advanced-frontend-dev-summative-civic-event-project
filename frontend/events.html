@@ -1,0 +1,97 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Events · CivicConnect</title>
+  <meta name="description" content="Browse published community events, filter by date or location, and register in seconds.">
+  <link rel="icon" href="assets/img/favicon.svg" type="image/svg+xml">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <script src="https://cdn.tailwindcss.com/3.4.16"></script>
+  <script src="assets/js/tailwind.config.js"></script>
+  <link rel="stylesheet" href="assets/css/app.css">
+</head>
+<body class="bg-canvas font-sans text-ink antialiased min-h-screen flex flex-col">
+  <a href="#main" class="skip-link">Skip to content</a>
+  <div id="app-header"></div>
+
+  <main id="main" tabindex="-1" class="flex-1">
+    <section class="bg-white border-b border-line">
+      <div class="max-w-content mx-auto px-4 sm:px-6 lg:px-8 py-8 sm:py-10">
+        <p class="text-overline uppercase text-brand">Events</p>
+        <h1 class="mt-1 text-2xl sm:text-3xl font-extrabold tracking-tight">Upcoming community events</h1>
+        <p class="mt-2 text-ink-secondary">Browse published events, filter by date or location, and save your spot in seconds.</p>
+
+        <form id="filters" class="mt-6 grid gap-3 md:grid-cols-[1fr_11rem_13rem_auto]" role="search" aria-label="Filter events">
+          <div class="relative">
+            <label for="q" class="sr-only">Search events by title, description or location</label>
+            <span class="absolute left-3.5 top-1/2 -translate-y-1/2 text-ink-muted pointer-events-none" data-icon="search"></span>
+            <input id="q" type="search" placeholder="Search by title or keyword…" autocomplete="off"
+              class="block w-full h-11 rounded-lg border border-line bg-white pl-10 pr-3.5 text-sm shadow-sm placeholder:text-ink-muted focus:border-brand focus:ring-4 focus:ring-brand-soft focus-visible:outline-none">
+          </div>
+          <div>
+            <label for="when" class="sr-only">Date</label>
+            <select id="when" class="block w-full h-11 rounded-lg border border-line bg-white px-3 text-sm shadow-sm focus:border-brand focus:ring-4 focus:ring-brand-soft focus-visible:outline-none">
+              <option value="all">Any date</option>
+              <option value="today">Today</option>
+              <option value="weekend">This weekend</option>
+              <option value="week">Next 7 days</option>
+              <option value="month">This month</option>
+              <option value="upcoming">Upcoming</option>
+              <option value="past">Past events</option>
+            </select>
+          </div>
+          <div>
+            <label for="loc" class="sr-only">Location</label>
+            <select id="loc" class="block w-full h-11 rounded-lg border border-line bg-white px-3 text-sm shadow-sm focus:border-brand focus:ring-4 focus:ring-brand-soft focus-visible:outline-none">
+              <option value="">All locations</option>
+            </select>
+          </div>
+          <button type="reset" class="inline-flex items-center justify-center gap-2 h-11 px-4 rounded-lg border border-line bg-white text-sm font-semibold hover:bg-subtle">Clear filters</button>
+        </form>
+        <div class="mt-4 flex flex-wrap items-center gap-2">
+          <span class="text-xs text-ink-muted" id="chips-label">Quick filters:</span>
+          <div id="chips" class="flex flex-wrap gap-2" role="group" aria-labelledby="chips-label"></div>
+        </div>
+      </div>
+    </section>
+
+    <section class="max-w-content mx-auto px-4 sm:px-6 lg:px-8 py-8" aria-labelledby="results-title">
+      <h2 id="results-title" class="sr-only">Event results</h2>
+      <div class="flex flex-wrap items-center justify-between gap-3">
+        <p id="result-count" class="text-sm text-ink-secondary" aria-live="polite"></p>
+        <div class="flex items-center gap-2 text-sm">
+          <label for="sort" class="text-ink-muted">Sort:</label>
+          <select id="sort" class="h-9 rounded-lg border border-line bg-white px-2.5 text-sm font-semibold focus:border-brand focus:ring-4 focus:ring-brand-soft focus-visible:outline-none">
+            <option value="soonest">Soonest first</option>
+            <option value="latest">Latest date first</option>
+            <option value="newest">Recently added</option>
+            <option value="title">Title A–Z</option>
+          </select>
+        </div>
+      </div>
+      <div id="event-grid" class="mt-5 grid gap-6 sm:grid-cols-2 lg:grid-cols-3" aria-busy="true"></div>
+      <div id="pager" class="mt-10"></div>
+    </section>
+  </main>
+
+  <div id="app-footer"></div>
+
+  <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+  <script src="assets/js/config.js"></script>
+  <script src="assets/js/core/utils.js"></script>
+  <script src="assets/js/core/icons.js"></script>
+  <script src="assets/js/core/auth.js"></script>
+  <script src="assets/js/core/api.js"></script>
+  <script src="assets/js/core/cache.js"></script>
+  <script src="assets/js/core/ui.js"></script>
+  <script src="assets/js/components/layout.js"></script>
+  <script src="assets/js/components/notifications.js"></script>
+  <script src="assets/js/components/media.js"></script>
+  <script src="assets/js/components/cards.js"></script>
+  <script src="assets/js/components/events-shared.js"></script>
+  <script src="assets/js/pages/events.js"></script>
+</body>
+</html>
