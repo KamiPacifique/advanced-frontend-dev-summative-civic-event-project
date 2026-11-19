@@ -1,0 +1,62 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Announcements · CivicConnect</title>
+  <meta name="description" content="Listen to the latest official audio announcements from your district and city services.">
+  <link rel="icon" href="assets/img/favicon.svg" type="image/svg+xml">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <script src="https://cdn.tailwindcss.com/3.4.16"></script>
+  <script src="assets/js/tailwind.config.js"></script>
+  <link rel="stylesheet" href="assets/css/app.css">
+</head>
+<body class="bg-canvas font-sans text-ink antialiased min-h-screen flex flex-col">
+  <a href="#main" class="skip-link">Skip to content</a>
+  <div id="app-header"></div>
+
+  <main id="main" tabindex="-1" class="flex-1">
+    <section class="bg-white border-b border-line">
+      <div class="max-w-content mx-auto px-4 sm:px-6 lg:px-8 py-8 sm:py-10">
+        <p class="text-overline uppercase text-brand">Announcements</p>
+        <h1 class="mt-1 text-2xl sm:text-3xl font-extrabold tracking-tight">Official audio announcements</h1>
+        <p class="mt-2 text-ink-secondary max-w-2xl">Listen to the latest updates from your district and city services. Press play on any card to listen right here, or open the full player.</p>
+        <div class="mt-6 flex flex-col md:flex-row md:items-center gap-3">
+          <div class="relative md:w-80">
+            <label for="q" class="sr-only">Search announcements</label>
+            <span class="absolute left-3.5 top-1/2 -translate-y-1/2 text-ink-muted pointer-events-none" data-icon="search"></span>
+            <input id="q" type="search" placeholder="Search announcements…" autocomplete="off"
+              class="block w-full h-11 rounded-lg border border-line bg-white pl-10 pr-3.5 text-sm shadow-sm placeholder:text-ink-muted focus:border-brand focus:ring-4 focus:ring-brand-soft focus-visible:outline-none">
+          </div>
+          <div id="chips" class="flex flex-wrap gap-2" role="group" aria-label="Filter by date"></div>
+        </div>
+      </div>
+    </section>
+
+    <section class="max-w-content mx-auto px-4 sm:px-6 lg:px-8 py-8" aria-labelledby="list-h">
+      <h2 id="list-h" class="sr-only">Announcements</h2>
+      <p id="result-count" class="text-sm text-ink-secondary" aria-live="polite"></p>
+      <div id="grid" class="mt-5 grid gap-5 sm:grid-cols-2 lg:grid-cols-3" aria-busy="true"></div>
+      <div id="pager" class="mt-10"></div>
+    </section>
+  </main>
+
+  <div id="app-footer"></div>
+
+  <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+  <script src="assets/js/config.js"></script>
+  <script src="assets/js/core/utils.js"></script>
+  <script src="assets/js/core/icons.js"></script>
+  <script src="assets/js/core/auth.js"></script>
+  <script src="assets/js/core/api.js"></script>
+  <script src="assets/js/core/cache.js"></script>
+  <script src="assets/js/core/ui.js"></script>
+  <script src="assets/js/components/layout.js"></script>
+  <script src="assets/js/components/notifications.js"></script>
+  <script src="assets/js/components/media.js"></script>
+  <script src="assets/js/components/cards.js"></script>
+  <script src="assets/js/pages/announcements.js"></script>
+</body>
+</html>

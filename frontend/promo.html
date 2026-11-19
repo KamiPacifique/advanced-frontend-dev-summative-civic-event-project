@@ -1,0 +1,52 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Promo · CivicConnect</title>
+  <meta name="description" content="Watch a captioned community promo video.">
+  <link rel="icon" href="assets/img/favicon.svg" type="image/svg+xml">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <script src="https://cdn.tailwindcss.com/3.4.16"></script>
+  <script src="assets/js/tailwind.config.js"></script>
+  <link rel="stylesheet" href="assets/css/app.css">
+</head>
+<body class="bg-canvas font-sans text-ink antialiased min-h-screen flex flex-col">
+  <a href="#main" class="skip-link">Skip to content</a>
+  <div id="app-header"></div>
+
+  <main id="main" tabindex="-1" class="flex-1">
+    <div class="max-w-content mx-auto px-4 sm:px-6 lg:px-8 py-6 sm:py-8 grid gap-8 lg:grid-cols-[1fr_18rem] items-start">
+      <div class="min-w-0">
+        <a href="promos.html" class="inline-flex items-center gap-1.5 text-sm font-semibold text-brand hover:underline"><span data-icon="arrow-left"></span>Back to promos</a>
+        <div id="root" class="mt-5" aria-busy="true">
+          <div class="space-y-4" aria-hidden="true"><div class="skeleton aspect-video !rounded-2xl"></div><div class="skeleton h-10 w-2/3"></div><div class="skeleton h-4 w-full"></div></div>
+        </div>
+      </div>
+      <aside aria-labelledby="next-h" class="lg:pt-11">
+        <h2 id="next-h" class="font-bold">Up next</h2>
+        <ul id="next" class="mt-3 space-y-3"></ul>
+      </aside>
+    </div>
+  </main>
+
+  <div id="app-footer"></div>
+
+  <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+  <script src="assets/js/config.js"></script>
+  <script src="assets/js/core/utils.js"></script>
+  <script src="assets/js/core/icons.js"></script>
+  <script src="assets/js/core/auth.js"></script>
+  <script src="assets/js/core/api.js"></script>
+  <script src="assets/js/core/cache.js"></script>
+  <script src="assets/js/core/ui.js"></script>
+  <script src="assets/js/components/layout.js"></script>
+  <script src="assets/js/components/notifications.js"></script>
+  <script src="assets/js/components/media.js"></script>
+  <script src="assets/js/components/cards.js"></script>
+  <script src="assets/js/components/admin-content.js"></script>
+  <script src="assets/js/pages/promo.js"></script>
+</body>
+</html>
