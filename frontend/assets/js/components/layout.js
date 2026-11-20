@@ -150,7 +150,7 @@
           '<li class="inline-flex items-center gap-2">' + icon('map-pin', 'w-4 h-4') + esc(c.address) + '</li></ul></div>' +
       '</div>' +
       '<div class="max-w-content mx-auto px-4 sm:px-6 lg:px-8"><div class="border-t border-white/15 py-6 flex flex-col sm:flex-row gap-2 justify-between text-xs text-slate-400">' +
-        '<p>© ' + new Date().getFullYear() + ' CivicConnect. All rights reserved.</p><p>Built with HTML · Tailwind CSS · jQuery</p></div></div>' +
+        '<p>© ' + new Date().getFullYear() + ' CivicConnect. All rights reserved.</p></div></div>' +
     '</footer>';
     $('#app-footer').replaceWith(html);
   }
