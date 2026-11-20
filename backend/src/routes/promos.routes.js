@@ -7,6 +7,12 @@ import validateBody from '../middlewares/validateBody.middleware.js';
 
 const router = express.Router();
 
+// Captions are required for uploaded videos, but optional when the promo uses
+// an external video link (YouTube/Vimeo players provide their own captions).
+const captionRule = body('caption_text')
+    .if((value, { req }) => req.file || !req.body.video_link)
+    .notEmpty().withMessage('Caption text is required');
+
 // Public (authenticated users)
 router.get('/', authenticate, controller.list);
 router.get('/:id', authenticate, controller.get);
@@ -20,7 +26,7 @@ router.post(
     [
         body('title').notEmpty().withMessage('Title is required'),
         body('description').notEmpty().withMessage('Description is required'),
-        body('caption_text').notEmpty().withMessage('Caption text is required')
+        captionRule
     ],
     validateBody,
     controller.create
@@ -34,7 +40,7 @@ router.put(
     [
         body('title').notEmpty().withMessage('Title is required'),
         body('description').notEmpty().withMessage('Description is required'),
-        body('caption_text').notEmpty().withMessage('Caption text is required')
+        captionRule
     ],
     validateBody,
     controller.update

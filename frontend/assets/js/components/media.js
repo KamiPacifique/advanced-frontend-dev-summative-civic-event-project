@@ -212,11 +212,65 @@
     this.seekTo = function (s) { audio.currentTime = s; audio.play().catch(function () {}); };
   }
 
+  /* ---------------- External video links (YouTube / Vimeo) ---------------- */
+  /**
+   * Recognise YouTube and Vimeo links. Returns
+   *   { provider, id, embed(startSeconds, autoplay), thumb }
+   * or null for anything else (direct video files play in a normal <video>).
+   */
+  function videoEmbed(url) {
+    var u;
+    try { u = new URL(String(url || '')); } catch (e) { return null; }
+    var host = u.hostname.replace(/^(www\.|m\.)/, ''), id = null, m;
+    if (host === 'youtu.be') id = u.pathname.slice(1).split('/')[0];
+    else if (host === 'youtube.com' || host === 'youtube-nocookie.com') {
+      if (u.pathname === '/watch') id = u.searchParams.get('v');
+      else if ((m = u.pathname.match(/^\/(embed|shorts|live|v)\/([^/?#]+)/))) id = m[2];
+    }
+    if (id && /^[\w-]{6,}$/.test(id)) {
+      return {
+        provider: 'youtube', id: id,
+        thumb: 'https://i.ytimg.com/vi/' + id + '/hqdefault.jpg',
+        embed: function (start, autoplay) {
+          return 'https://www.youtube-nocookie.com/embed/' + id + '?rel=0&cc_load_policy=1' +
+            (start ? '&start=' + Math.floor(start) : '') + (autoplay ? '&autoplay=1' : '');
+        }
+      };
+    }
+    if (host === 'vimeo.com' || host === 'player.vimeo.com') {
+      m = u.pathname.match(/(?:^|\/)(\d{5,})(?:\/|$)/);
+      if (m) {
+        var vid = m[1];
+        return {
+          provider: 'vimeo', id: vid, thumb: null,
+          embed: function (start, autoplay) {
+            return 'https://player.vimeo.com/video/' + vid + '?texttrack=en' + (autoplay ? '&autoplay=1' : '') + (start ? '#t=' + Math.floor(start) + 's' : '');
+          }
+        };
+      }
+    }
+    return null;
+  }
+
+  /** Accessible <iframe> player for an embeddable link. */
+  function embedFrame(info, title, cls) {
+    return '<iframe class="' + (cls || 'w-full aspect-video bg-black') + '" src="' + esc(info.embed()) + '" title="' + esc(title || 'Video') + '"' +
+      ' allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; fullscreen" allowfullscreen loading="lazy" referrerpolicy="strict-origin-when-cross-origin"></iframe>';
+  }
+
   /* ---------------- Lazy video thumbnails ---------------- */
   /** Videos with [data-lazy-src] only start fetching metadata once scrolled into view. */
   function lazyVideos($root) {
     var vids = $($root).find('video[data-lazy-src]').toArray();
     function load(v) {
+      // YouTube / Vimeo links can't be loaded into <video>: show their thumbnail instead.
+      var ext = videoEmbed(v.getAttribute('data-lazy-src'));
+      if (ext) {
+        v.removeAttribute('data-lazy-src');
+        if (ext.thumb) $(v).replaceWith('<img src="' + esc(ext.thumb) + '" alt="" loading="lazy" class="' + esc(v.className) + '" aria-hidden="true">');
+        else $(v).addClass('hidden');
+        return;
+      }
       v.preload = 'metadata';
       v.src = v.getAttribute('data-lazy-src') + '#t=0.5';   // render the first frame as thumbnail
       v.removeAttribute('data-lazy-src');
@@ -237,6 +291,7 @@
     probeDuration: probeDuration, fillDurations: fillDurations,
     waveform: waveform, setWaveProgress: setWaveProgress,
     toVTT: toVTT, trackURL: trackURL, transcript: transcript, isVTT: isVTT,
-    miniToggle: miniToggle, AudioPlayer: AudioPlayer, lazyVideos: lazyVideos
+    miniToggle: miniToggle, AudioPlayer: AudioPlayer, lazyVideos: lazyVideos,
+    videoEmbed: videoEmbed, embedFrame: embedFrame
   };
 })(window, jQuery);

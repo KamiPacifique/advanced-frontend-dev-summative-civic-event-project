@@ -38,21 +38,26 @@
     function render() {
       document.title = item.title + ' · CivicConnect';
       var cues = media.transcript(item.caption_text);
+      // YouTube / Vimeo links play in the provider's own player (with its own captions).
+      var ext = media.videoEmbed(item.video_url), cc = item.caption_text && !ext;
       $root.attr('aria-busy', 'false').html(
         (isAdmin ? '<div id="admin-bar" class="mb-5">' + CE.adminContent.toolbar('promo', item) + '</div>' : '') +
         '<div class="rounded-2xl overflow-hidden bg-inverse shadow-pop">' +
+          (ext ? media.embedFrame(ext, item.title, 'block w-full aspect-video bg-black border-0') :
           '<video id="video" class="w-full aspect-video bg-black" controls playsinline preload="metadata" aria-label="' + esc(item.title) + '">' +
             '<source src="' + esc(item.video_url) + '">' +
             'Your browser doesn’t support HTML5 video. <a href="' + esc(item.video_url) + '" download>Download the video</a>.' +
-          '</video></div>' +
+          '</video>') + '</div>' +
         '<div id="fallback" class="mt-3 hidden"></div>' +
         '<div class="mt-4 flex flex-wrap items-center gap-2">' +
-          (item.caption_text ? ui.badge('Captions available', 'brand') : ui.badge('No captions', 'neutral')) +
+          (item.caption_text ? ui.badge(ext ? 'Transcript available' : 'Captions available', 'brand') : ui.badge('No captions', 'neutral')) +
+          (ext ? ui.badge(ext.provider === 'youtube' ? 'YouTube' : 'Vimeo', 'neutral') : '') +
           (item.published === false ? ui.badge('Unpublished', 'accent') : '') +
           '<span class="text-xs text-ink-muted ml-1">Added ' + esc(util.formatDateYear(item.created_at)) + '</span>' +
           '<span class="ml-auto flex gap-2">' +
-            (item.caption_text ? '<button type="button" class="js-cc inline-flex items-center gap-1.5 h-8 px-3 rounded-lg border border-line text-xs font-semibold" aria-pressed="true">' + icon('captions', 'w-4 h-4') + '<span class="js-cc-label">Captions on</span></button>' : '') +
-            '<button type="button" class="js-fs inline-flex items-center gap-1.5 h-8 px-3 rounded-lg border border-line bg-white text-xs font-semibold hover:bg-subtle">' + icon('maximize', 'w-4 h-4') + 'Fullscreen</button>' +
+            (cc ? '<button type="button" class="js-cc inline-flex items-center gap-1.5 h-8 px-3 rounded-lg border border-line text-xs font-semibold" aria-pressed="true">' + icon('captions', 'w-4 h-4') + '<span class="js-cc-label">Captions on</span></button>' : '') +
+            (ext ? '<a href="' + esc(item.video_url) + '" target="_blank" rel="noopener" class="inline-flex items-center gap-1.5 h-8 px-3 rounded-lg border border-line bg-white text-xs font-semibold hover:bg-subtle">Watch on ' + (ext.provider === 'youtube' ? 'YouTube' : 'Vimeo') + '<span class="sr-only"> (opens in a new tab)</span></a>' :
+            '<button type="button" class="js-fs inline-flex items-center gap-1.5 h-8 px-3 rounded-lg border border-line bg-white text-xs font-semibold hover:bg-subtle">' + icon('maximize', 'w-4 h-4') + 'Fullscreen</button>') +
           '</span></div>' +
         '<h1 class="mt-4 text-3xl sm:text-4xl font-extrabold tracking-tight leading-tight">' + esc(item.title) + '</h1>' +
         (item.description ? '<p class="mt-3 text-ink-secondary leading-relaxed">' + esc(item.description) + '</p>' : '') +
@@ -66,6 +71,12 @@
         '</section>'
       );
 
+      if (isAdmin) CE.adminContent.bindToolbar($('#admin-bar'), 'promo', function () { return item; }, {
+        onUpdate: function (u) { item = $.extend(item, u); render(); },
+        onDelete: function () { util.flash.set('success', 'Promo deleted'); location.href = util.url('promos.html'); }
+      });
+      if (ext) return;
+
       var video = document.getElementById('video');
       attachTrack(video, null);
       video.addEventListener('loadedmetadata', function () {
@@ -75,11 +86,6 @@
       if (video.textTracks) video.textTracks.addEventListener('change', function () { syncCcButton(video); });
       video.addEventListener('error', showFallback, true);
       $(video).find('source').on('error', showFallback);
-
-      if (isAdmin) CE.adminContent.bindToolbar($('#admin-bar'), 'promo', function () { return item; }, {
-        onUpdate: function (u) { item = $.extend(item, u); render(); },
-        onDelete: function () { util.flash.set('success', 'Promo deleted'); location.href = util.url('promos.html'); }
-      });
     }
 
     function showFallback() {
@@ -97,7 +103,9 @@
       (v.requestFullscreen || v.webkitEnterFullscreen || v.webkitRequestFullscreen || function () {}).call(v);
     });
     $root.on('click', '[data-seek]', function () {
-      var v = document.getElementById('video'); v.currentTime = Number($(this).data('seek')); v.play().catch(function () {});
+      var sec = Number($(this).data('seek')), ext = media.videoEmbed(item.video_url);
+      if (ext) { $root.find('iframe').attr('src', ext.embed(sec, true)); return; }
+      var v = document.getElementById('video'); if (!v) return; v.currentTime = sec; v.play().catch(function () {});
     });
     $root.on('click', '.js-tr-toggle', function () {
       var open = $(this).attr('aria-expanded') === 'true';

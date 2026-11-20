@@ -83,7 +83,7 @@ No other environment variables are needed. The backend already enables CORS for 
 | **Admin** dashboard | `admin/index.html` | `GET /dashboard/admin`, attendees per event |
 | **Admin** events | `admin/events.html`, `admin/event-form.html` | `POST /events`, `PUT /events/:id` (multipart, `image`), `DELETE /events/:id` |
 | **Admin** announcements | `admin/announcements.html` | `POST /announcements` (multipart, `audio`), `PUT`, `PATCH …/publish` / `…/unpublish`, `DELETE` |
-| **Admin** promos | `admin/promos.html`, `admin/promo-form.html` | `POST` / `PUT /promos` (multipart, `video` + `caption_text`), publish/unpublish, `DELETE` |
+| **Admin** promos | `admin/promos.html`, `admin/promo-form.html` | `POST` / `PUT /promos` (multipart, `video` file **or** `video_link` URL, + `caption_text`), publish/unpublish, `DELETE` |
 | **Admin** notifications | `admin/notifications.html` | `DELETE /notifications/:id` |
 | **Admin** users | `admin/users.html` | `GET /users`, `GET /users/:id`, `PATCH /users/:id/enable` / `/disable` |
 | **Admin** registrations | `admin/registrations.html` | `GET /event-registrations/event/:id/attendees`, `GET /event-feedback/event/:id` |

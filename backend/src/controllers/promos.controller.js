@@ -3,6 +3,20 @@ import * as Notifications from '../models/notifications.model.js';
 import * as PromoModel from '../models/promos.model.js';
 
 /**
+ * Validate an external video link (YouTube, Vimeo or a direct video URL).
+ * Returns the trimmed URL, or null if it isn't a valid http(s) link.
+ */
+const parseVideoLink = (value) => {
+    if (typeof value !== 'string' || !value.trim()) return null;
+    try {
+        const url = new URL(value.trim());
+        return url.protocol === 'http:' || url.protocol === 'https:' ? url.toString() : null;
+    } catch {
+        return null;
+    }
+};
+
+/**
  * Get all promos (paginated)
  */
 export const list = async (req, res, next) => {
@@ -43,11 +57,15 @@ export const create = async (req, res, next) => {
         const { title, description, caption_text } = req.body;
         const created_by = req.user.id;
 
-        if (!req.file) {
-            return res.status(400).json({ status: 400, message: 'Video file is required' });
+        const video_link = parseVideoLink(req.body.video_link);
+
+        if (!req.file && !video_link) {
+            return res.status(400).json({ status: 400, message: 'A video file or a valid video link is required' });
         }
 
-        const video_url = `${req.protocol}://${req.get('host')}/uploads/promos/${req.file.filename}`;
+        const video_url = req.file
+            ? `${req.protocol}://${req.get('host')}/uploads/promos/${req.file.filename}`
+            : video_link;
 
         const promo = await Promos.create({
             title,
@@ -96,9 +114,15 @@ export const update = async (req, res, next) => {
             published: req.body.published,
         };
 
-        // Optional video upload
+        // Optional new video: an uploaded file takes priority over a link
         if (req.file) {
             fieldsToUpdate.video_url = `${req.protocol}://${req.get('host')}/uploads/promos/${req.file.filename}`;
+        } else if (req.body.video_link !== undefined && req.body.video_link !== '') {
+            const video_link = parseVideoLink(req.body.video_link);
+            if (!video_link) {
+                return res.status(400).json({ status: 400, message: 'Video link must be a valid http(s) URL' });
+            }
+            fieldsToUpdate.video_url = video_link;
         }
 
         const updated = await Promos.update(id, fieldsToUpdate);
