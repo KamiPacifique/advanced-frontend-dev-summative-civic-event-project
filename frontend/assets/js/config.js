@@ -47,7 +47,7 @@
 
     CONTACT: {
       email: 'support@civicconnect.rw',
-      phone: '+250 788 000 000',
+      phone: '+250 788 123 456',
       address: 'KN 3 Ave, Kigali'
     }
   };

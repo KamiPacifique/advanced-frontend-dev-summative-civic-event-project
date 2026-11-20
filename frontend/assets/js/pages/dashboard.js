@@ -14,7 +14,7 @@
     if (CE.auth.isAdmin()) { location.replace(util.url('admin/index.html')); return; }
 
     var user = CE.auth.user(), h = new Date().getHours();
-    $('#greeting').text((h < 12 ? 'Good morning' : h < 18 ? 'Good afternoon' : 'Good evening') + ', ' + util.firstName(user.full_name) + ' 👋');
+    $('#greeting').text((h < 12 ? 'Good morning' : h < 18 ? 'Good afternoon' : 'Good evening') + ', ' + util.firstName(user.full_name));
 
     function statCard(ic, tone, label, value, href) {
       return '<a href="' + util.url(href) + '" class="' + ui.cls.card + ' p-4 sm:p-5 hover:shadow-pop hover:-translate-y-0.5 transition block">' +

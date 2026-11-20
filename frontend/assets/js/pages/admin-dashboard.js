@@ -12,7 +12,7 @@
   // ROLE GUARD: auth 'admin' → non-admins get the 403 screen, guests go to login.
   CE.boot({ auth: 'admin', layout: 'admin', nav: 'admin-dashboard', title: 'Dashboard', crumb: 'Overview' }, function () {
     var user = CE.auth.user(), h = new Date().getHours(), timer = null;
-    $('#greeting').text((h < 12 ? 'Good morning' : h < 18 ? 'Good afternoon' : 'Good evening') + ', ' + util.firstName(user.full_name) + ' 👋');
+    $('#greeting').text((h < 12 ? 'Good morning' : h < 18 ? 'Good afternoon' : 'Good evening') + ', ' + util.firstName(user.full_name));
 
     function card(ic, tone, label, value, sub, href) {
       return '<a href="' + href + '" class="' + ui.cls.card + ' p-5 block hover:shadow-pop transition">' +
@@ -109,7 +109,6 @@
       CE.endpoints.adminDashboard().then(function (r) {
         $('#dash-error').empty();
         renderStats(r.data || {}); renderGrowth((r.data || {}).user_growth);
-        $('#updated').text('last updated ' + util.formatTime(new Date()));
         if (manual) ui.toast('success', 'Dashboard refreshed');
       }).catch(function (err) {
         $('#dash-error').html(ui.alert('danger', err.message + ' The numbers below may be out of date.', 'Couldn’t load dashboard data'));
